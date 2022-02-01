@@ -2,6 +2,8 @@ import { type } from "@testing-library/user-event/dist/type";
 
 const ADD_DRAGON = 'spacetravelers-hub/redux/dragons/ADD_DRAGON';
 const RESERVE_DRAGON = 'spacetravelers-hub/redux/dragons/RESERVE_DRAGON';
+const CANCEL_RESERVATION = 'spacetravelers-hub/redux/dragons/CANCEL_RESERVATION';
+
 
 const dragonURL = 'https://api.spacexdata.com/v3/dragons';
 
@@ -17,6 +19,11 @@ export const reserveDragon = (dragonId) => ({
 	dragonId
 })
 
+export const cancelDragonReservation = (dragonId) => ({
+  type: CANCEL_RESERVATION,
+  dragonId
+})
+
 const dragonBooking = (state, id) => {
 	const newState = state.map(dragon => {
 		if(dragon.dragon_id !== id) {
@@ -24,6 +31,16 @@ const dragonBooking = (state, id) => {
 		}
 		return {...dragon, reserved: true}
 	})
+  return newState;
+}
+
+const cancelReservation = (state, id) => {
+  const newState = state.map(dragon => {
+    if(dragon.dragon_id !== id) {
+      return dragon;
+    }
+    return {...dragon, reserved: false}
+  })
   return newState;
 }
 
@@ -48,7 +65,9 @@ const dragonReducer = (state = initialState, action) => {
     case ADD_DRAGON:
       return [...state, ...action.dragons];
 		case RESERVE_DRAGON:
-			return dragonBooking(state, action.dragonId)
+			return dragonBooking(state, action.dragonId);
+    case CANCEL_RESERVATION:
+      return cancelReservation(state, action.dragonId);
     default:
       return state;
   }
