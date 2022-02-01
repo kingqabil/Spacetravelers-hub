@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addMission } from '../../redux/missions/missions';
+import MissionsTable from './MissionsTable';
 
 const missionsAPI = 'https://api.spacexdata.com/v3/missions';
 
@@ -24,7 +25,7 @@ const Missions = () => {
     }
   }, []);
 
-  return <h1>Missions</h1>;
+  return <MissionsTable />;
 };
 
 export default Missions;
