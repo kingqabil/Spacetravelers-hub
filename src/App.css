@@ -88,3 +88,7 @@ nav li {
   text-align: center;
   vertical-align: middle;
 }
+
+.table > :not(:first-child) {
+  border-top: 2px solid rgb(222, 226, 230);
+}
