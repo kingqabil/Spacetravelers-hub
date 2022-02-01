@@ -71,3 +71,20 @@ nav li {
   color: #fff;
   width: 100px;
 }
+
+.table-wrapper {
+  padding: 20px 35px;
+}
+
+.mission {
+  width: 10%;
+}
+
+.description {
+  width: 70%;
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle;
+}

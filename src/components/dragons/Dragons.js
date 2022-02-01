@@ -17,20 +17,18 @@ const Dragons = () => {
 
   return (
     <div className="dragons-list">
-      {
-dragonsData.map((dragon) => (
-  <div key={dragon.dragon_id} className="dragon">
-    <div className="dragon-img">
-      <img src={dragon.dragon_img} alt={dragon.dragon_name} />
-    </div>
-    <div className="dragon-description">
-      <h3>{dragon.dragon_name}</h3>
-      <p>{dragon.dragon_description}</p>
-      <Button variant="primary">Reserve Dragon</Button>
-    </div>
-  </div>
-))
-}
+      {dragonsData.map((dragon) => (
+        <div key={dragon.dragon_id} className="dragon">
+          <div className="dragon-img">
+            <img src={dragon.dragon_img} alt={dragon.dragon_name} />
+          </div>
+          <div className="dragon-description">
+            <h3>{dragon.dragon_name}</h3>
+            <p>{dragon.dragon_description}</p>
+            <Button variant="primary">Reserve Dragon</Button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
