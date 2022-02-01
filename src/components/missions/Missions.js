@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { addMission } from '../../redux/missions/missions';
 
 const missionsAPI = 'https://api.spacexdata.com/v3/missions';
@@ -13,16 +14,17 @@ const populateReduxStore = (missions, dispatch) => {
 
 const Missions = () => {
   const dispatch = useDispatch();
+  const missions = useSelector((state) => state.missions);
 
   useEffect(() => {
-    axios
-      .get(missionsAPI)
-      .then((missions) => populateReduxStore(missions.data, dispatch));
+    if (missions.length === 0) {
+      axios
+        .get(missionsAPI)
+        .then((missions) => populateReduxStore(missions.data, dispatch));
+    }
   }, []);
 
-  return (
-    <h1>Missions</h1>
-  );
+  return <h1>Missions</h1>;
 };
 
 export default Missions;
