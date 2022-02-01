@@ -1,4 +1,4 @@
-const ADD_MISSION = 'bookStore/books/ADD_MISSION';
+const ADD_MISSION = 'spacetravelers-hub/missions/ADD_MISSION';
 
 const initialState = [];
 
