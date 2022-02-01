@@ -1,9 +1,6 @@
-import { type } from "@testing-library/user-event/dist/type";
-
 const ADD_DRAGON = 'spacetravelers-hub/redux/dragons/ADD_DRAGON';
 const RESERVE_DRAGON = 'spacetravelers-hub/redux/dragons/RESERVE_DRAGON';
 const CANCEL_RESERVATION = 'spacetravelers-hub/redux/dragons/CANCEL_RESERVATION';
-
 
 const dragonURL = 'https://api.spacexdata.com/v3/dragons';
 
@@ -16,33 +13,33 @@ const addDragon = (dragons) => ({
 
 export const reserveDragon = (dragonId) => ({
   type: RESERVE_DRAGON,
-	dragonId
-})
+  dragonId,
+});
 
 export const cancelDragonReservation = (dragonId) => ({
   type: CANCEL_RESERVATION,
-  dragonId
-})
+  dragonId,
+});
 
 const dragonBooking = (state, id) => {
-	const newState = state.map(dragon => {
-		if(dragon.dragon_id !== id) {
-			return dragon;
-		}
-		return {...dragon, reserved: true}
-	})
-  return newState;
-}
-
-const cancelReservation = (state, id) => {
-  const newState = state.map(dragon => {
-    if(dragon.dragon_id !== id) {
+  const newState = state.map((dragon) => {
+    if (dragon.dragon_id !== id) {
       return dragon;
     }
-    return {...dragon, reserved: false}
-  })
+    return { ...dragon, reserved: true };
+  });
   return newState;
-}
+};
+
+const cancelReservation = (state, id) => {
+  const newState = state.map((dragon) => {
+    if (dragon.dragon_id !== id) {
+      return dragon;
+    }
+    return { ...dragon, reserved: false };
+  });
+  return newState;
+};
 
 export const getDragonsFromAPI = () => (async (dispatch) => {
   const response = await fetch(dragonURL);
@@ -64,8 +61,8 @@ const dragonReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_DRAGON:
       return [...state, ...action.dragons];
-		case RESERVE_DRAGON:
-			return dragonBooking(state, action.dragonId);
+    case RESERVE_DRAGON:
+      return dragonBooking(state, action.dragonId);
     case CANCEL_RESERVATION:
       return cancelReservation(state, action.dragonId);
     default:

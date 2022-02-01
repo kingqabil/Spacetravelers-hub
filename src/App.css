@@ -71,3 +71,9 @@ nav li {
   color: #fff;
   width: 100px;
 }
+
+.reserved-badge {
+  padding: 3px 3px;
+  margin-right: 5px;
+  color: #fff;
+}
