@@ -16,7 +16,7 @@ export const getDragonsFromAPI = () => (async (dispatch) => {
     const dragon = {
       dragon_id: d.id,
       dragon_name: d.name,
-      dragon_type: d.type,
+      dragon_description: d.description,
       dragon_img: d.flickr_images[0],
     };
     dragonsArr.push(dragon);

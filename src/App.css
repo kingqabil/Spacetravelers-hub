@@ -51,3 +51,23 @@ nav li {
   border-left: 2px solid #4e98ec;
   padding-left: 10px;
 }
+
+.dragon {
+  display: flex;
+}
+
+.dragon-img img {
+  height: 270px;
+  width: 290px;
+  padding: 20px 0 0 40px;
+}
+
+.dragon-description {
+  padding: 20px;
+}
+
+.dragon-btn {
+  background-color: #007bff;
+  color: #fff;
+  width: 100px;
+}
