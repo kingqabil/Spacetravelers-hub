@@ -19,7 +19,7 @@ const Dragons = () => {
     <div className="dragons-list">
       {
 dragonsData.map((dragon) => (
-  <div key={dragon.id} className="dragon">
+  <div key={dragon.dragon_id} className="dragon">
     <div className="dragon-img">
       <img src={dragon.dragon_img} alt={dragon.dragon_name} />
     </div>
