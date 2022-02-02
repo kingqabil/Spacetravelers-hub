@@ -1,22 +1,23 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { rocketsAction } from '../../redux/rockets/rockets';
+import Rocket from './Rocket';
 
 const Rockets = () => {
-  const reducerRock = useSelector((state) => state.rockets);
+  const reducerRockets = useSelector((state) => state.rockets);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(rocketsAction());
-  }, []);
+    if (reducerRockets.data.length === 0) {
+      dispatch(rocketsAction());
+    }
+  }, [dispatch]);
 
   return (
     <div>
-      <ul>
-        {reducerRock.data && reducerRock.data.map((e) => (
-          <li key={e.id}>{e.company}</li>
-        ))}
-      </ul>
+      { reducerRockets.data && reducerRockets.data.map((e) => (
+        <Rocket key={e.id} content={e} />
+      ))}
     </div>
   );
 };
