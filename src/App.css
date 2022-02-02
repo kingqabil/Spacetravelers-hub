@@ -72,6 +72,27 @@ nav li {
   width: 100px;
 }
 
+.table-wrapper {
+  padding: 20px 35px;
+}
+
+.mission {
+  width: 10%;
+}
+
+.description {
+  width: 70%;
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table > :not(:first-child) {
+  border-top: 2px solid rgb(222, 225, 230);
+}
+
 .reserved-badge {
   padding: 3px 3px;
   margin-right: 5px;
