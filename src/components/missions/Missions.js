@@ -2,15 +2,30 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addMission } from '../../redux/missions/missions';
 import MissionsTable from './MissionsTable';
+import { ADD_MISSION, createAction } from '../../redux/missions/missions';
 
 const missionsAPI = 'https://api.spacexdata.com/v3/missions';
 
 const populateReduxStore = (missions, dispatch) => {
   missions.forEach((mission) => {
-    dispatch(addMission(mission));
+    dispatch(createAction(ADD_MISSION, mission));
   });
+};
+
+const moveAPIDataToMissionsArray = (data, dispatch) => {
+  const missionsArray = [];
+
+  data.forEach((item) => {
+    missionsArray.push({
+      id: item.mission_id,
+      name: item.mission_name,
+      description: item.description,
+      reserved: false,
+    });
+  });
+
+  populateReduxStore(missionsArray, dispatch);
 };
 
 const Missions = () => {
@@ -21,7 +36,7 @@ const Missions = () => {
     if (missions.length === 0) {
       axios
         .get(missionsAPI)
-        .then((missions) => populateReduxStore(missions.data, dispatch));
+        .then((missions) => moveAPIDataToMissionsArray(missions.data, dispatch));
     }
   }, []);
 

@@ -1,9 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import { createAction, JOIN_MISSION, LEAVE_MISSION } from '../../redux/missions/missions';
+
+const updateMissionReservedStatus = (mission, dispatch) => {
+  if (mission.reserved === true) {
+    dispatch(createAction(LEAVE_MISSION, mission.id));
+  } else {
+    dispatch(createAction(JOIN_MISSION, mission.id));
+  }
+};
 
 const MissionsTable = () => {
+  const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions);
 
   return (
@@ -13,23 +23,28 @@ const MissionsTable = () => {
           <tr>
             <th className="mission">Mission</th>
             <th className="description">Description</th>
-            <th>Status</th>
-            <th>{}</th>
+            <th className="status">Status</th>
+            <th className="reserve">{}</th>
           </tr>
         </thead>
         <tbody>
           {missions.map((mission) => (
-            <tr key={mission.mission_id}>
-              <td>{mission.mission_name}</td>
+            <tr key={mission.id}>
+              <td>{mission.name}</td>
               <td>{mission.description}</td>
               <td className="center">
-                <Badge size="sm" bg="secondary">
-                  NOT A MEMEBER
+                <Badge size="sm" bg={mission.reserved ? 'success' : 'secondary'}>
+                  {mission.reserved ? 'ACTIVE MEMBER' : 'NOT A MEMBER'}
                 </Badge>
               </td>
               <td className="center">
                 {' '}
-                <Button variant="outline-secondary">Join Mission</Button>
+                <Button
+                  onClick={() => updateMissionReservedStatus(mission, dispatch)}
+                  variant={mission.reserved ? 'outline-danger' : 'outline-secondary'}
+                >
+                  {mission.reserved ? 'LEAVE MISSION' : 'JOIN MISSION'}
+                </Button>
               </td>
             </tr>
           ))}

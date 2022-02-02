@@ -84,6 +84,14 @@ nav li {
   width: 70%;
 }
 
+.status {
+  width: 9%;
+}
+
+.reserve {
+  width: 11%;
+}
+
 .center {
   text-align: center;
   vertical-align: middle;
