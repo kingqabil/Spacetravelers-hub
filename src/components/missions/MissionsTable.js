@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import Table from 'react-bootstrap/Table';
+import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 
 const MissionsTable = () => {
@@ -22,9 +23,9 @@ const MissionsTable = () => {
               <td>{mission.mission_name}</td>
               <td>{mission.description}</td>
               <td className="center">
-                <Button variant="secondary" size="sm">
-                  NOT A MEMBER
-                </Button>
+                <Badge size="sm" bg="secondary">
+                  NOT A MEMEBER
+                </Badge>
               </td>
               <td className="center">
                 {' '}
