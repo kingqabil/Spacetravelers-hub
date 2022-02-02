@@ -2,7 +2,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import { joinMission } from '../../redux/missions/missions';
+import { createAction, JOIN_MISSION, LEAVE_MISSION } from '../../redux/missions/missions';
+
+const updateMissionReservedStatus = (mission, dispatch) => {
+  if (mission.reserved === true) {
+    dispatch(createAction(LEAVE_MISSION, mission.id));
+  } else {
+    dispatch(createAction(JOIN_MISSION, mission.id));
+  }
+};
 
 const MissionsTable = () => {
   const dispatch = useDispatch();
@@ -26,13 +34,13 @@ const MissionsTable = () => {
               <td>{mission.description}</td>
               <td className="center">
                 <Badge size="sm" bg={mission.reserved ? 'success' : 'secondary'}>
-                  NOT A MEMEBER
+                  {mission.reserved ? 'ACTIVE MEMBER' : 'NOT A MEMBER'}
                 </Badge>
               </td>
               <td className="center">
                 {' '}
                 <Button
-                  onClick={() => dispatch(joinMission(mission.id))}
+                  onClick={() => updateMissionReservedStatus(mission, dispatch)}
                   variant={mission.reserved ? 'outline-danger' : 'outline-secondary'}
                 >
                   {mission.reserved ? 'LEAVE MISSION' : 'JOIN MISSION'}

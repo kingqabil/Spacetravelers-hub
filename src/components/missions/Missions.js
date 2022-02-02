@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addMission } from '../../redux/missions/missions';
 import MissionsTable from './MissionsTable';
+import { ADD_MISSION, createAction } from '../../redux/missions/missions';
 
 const missionsAPI = 'https://api.spacexdata.com/v3/missions';
 
 const populateReduxStore = (missions, dispatch) => {
   missions.forEach((mission) => {
-    dispatch(addMission(mission));
+    dispatch(createAction(ADD_MISSION, mission));
   });
 };
 
