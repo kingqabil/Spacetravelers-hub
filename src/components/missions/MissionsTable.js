@@ -33,9 +33,9 @@ const MissionsTable = () => {
                 {' '}
                 <Button
                   onClick={() => dispatch(joinMission(mission.id))}
-                  variant="outline-secondary"
+                  variant={mission.reserved ? 'outline-danger' : 'outline-secondary'}
                 >
-                  Join Mission
+                  {mission.reserved ? 'LEAVE MISSION' : 'JOIN MISSION'}
                 </Button>
               </td>
             </tr>
