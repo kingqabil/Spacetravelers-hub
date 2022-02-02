@@ -1,3 +1,11 @@
-const MyProfile = () => (<h1>My Profile</h1>);
+import React from "react";
+import ReservedDragons from "./dragons/ReservedDragons";
 
+const MyProfile = () => {
+    return (
+        <div className="profile-wrapper">
+          <ReservedDragons />
+        </div>
+    )
+}
 export default MyProfile;

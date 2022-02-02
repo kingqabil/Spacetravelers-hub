@@ -98,3 +98,22 @@ nav li {
   margin-right: 5px;
   color: #fff;
 }
+
+.profile-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-container {
+  margin: 25px;
+  width: 30vw;
+}
+
+.profile-container div {
+  border: 1px solid #eee;
+  border-radius: 2px;
+}
+
+.profile-container p {
+  margin: 25px;
+}
