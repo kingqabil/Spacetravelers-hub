@@ -13,6 +13,21 @@ const populateReduxStore = (missions, dispatch) => {
   });
 };
 
+const moveAPIDataToMissionsArray = (data, dispatch) => {
+  const missionsArray = [];
+
+  data.forEach((item) => {
+    missionsArray.push({
+      id: item.mission_id,
+      name: item.mission_name,
+      description: item.description,
+      reserved: false,
+    });
+  });
+
+  populateReduxStore(missionsArray, dispatch);
+};
+
 const Missions = () => {
   const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions);
@@ -21,7 +36,7 @@ const Missions = () => {
     if (missions.length === 0) {
       axios
         .get(missionsAPI)
-        .then((missions) => populateReduxStore(missions.data, dispatch));
+        .then((missions) => moveAPIDataToMissionsArray(missions.data, dispatch));
     }
   }, []);
 

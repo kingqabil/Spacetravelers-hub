@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import { joinMission } from '../../redux/missions/missions';
 
 const MissionsTable = () => {
+  const dispatch = useDispatch();
   const missions = useSelector((state) => state.missions);
 
   return (
@@ -19,17 +21,22 @@ const MissionsTable = () => {
         </thead>
         <tbody>
           {missions.map((mission) => (
-            <tr key={mission.mission_id}>
-              <td>{mission.mission_name}</td>
+            <tr key={mission.id}>
+              <td>{mission.name}</td>
               <td>{mission.description}</td>
               <td className="center">
-                <Badge size="sm" bg="secondary">
+                <Badge size="sm" bg={mission.reserved ? 'success' : 'secondary'}>
                   NOT A MEMEBER
                 </Badge>
               </td>
               <td className="center">
                 {' '}
-                <Button variant="outline-secondary">Join Mission</Button>
+                <Button
+                  onClick={() => dispatch(joinMission(mission.id))}
+                  variant="outline-secondary"
+                >
+                  Join Mission
+                </Button>
               </td>
             </tr>
           ))}
