@@ -90,7 +90,7 @@ nav li {
 }
 
 .table > :not(:first-child) {
-  border-top: 2px solid rgb(222, 226, 230);
+  border-top: 2px solid rgb(222, 225, 230);
 }
 
 .reserved-badge {
