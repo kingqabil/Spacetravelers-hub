@@ -9,7 +9,7 @@ import missionsReducer from './missions/missions';
 const reducer = combineReducers({
   missions: missionsReducer,
   dragons: dragonReducer,
-  rockets: rocketsReducer,
+  rocketsReducer,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
