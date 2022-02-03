@@ -1,24 +1,32 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { rocketsAction } from '../../redux/rockets/rockets';
+import Rockets from './Rocket';
+import { fetchRockets } from '../../redux/rockets/rockets';
 
-const Rockets = () => {
-  const reducerRock = useSelector((state) => state.rockets);
+const DisplayRockets = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(rocketsAction());
+    fetchRockets(dispatch);
   }, []);
 
+  const rocketsStore = useSelector((store) => Object.values(store.rocketsReducer.rockets));
+
   return (
-    <div>
-      <ul>
-        {reducerRock.data && reducerRock.data.map((e) => (
-          <li key={e.id}>{e.company}</li>
-        ))}
-      </ul>
+    <div className="container">
+
+      {
+        rocketsStore.map((rockets) => (
+          <Rockets
+            key={rockets.id}
+            flickr_images={rockets.flickr_images}
+            rocket_name={rockets.rocket_name}
+            description={rockets.description}
+          />
+        ))
+      }
     </div>
   );
 };
 
-export default Rockets;
+export default DisplayRockets;

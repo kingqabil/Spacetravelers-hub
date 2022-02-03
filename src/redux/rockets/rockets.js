@@ -1,32 +1,30 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const rocketsAction = createAsyncThunk('rocket/rockets', async () => {
-  const req = await fetch('https://api.spacexdata.com/v3/rockets');
-  const rockets = await req.json();
-  return rockets;
+const SET_ROCKETS = 'space-travelers/rockets/SET_ROCKETS';
+const URL = 'https://api.spacexdata.com/v3/rockets';
+const initialState = {
+  rockets: [],
+};
+
+const rocketsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case SET_ROCKETS:
+      return { ...state, rockets: action.payload };
+    default:
+      return state;
+  }
+};
+
+const setRockets = (payload) => ({
+  type: SET_ROCKETS,
+  payload,
 });
 
-const rocketsSlice = createSlice({
-  name: 'rocket',
-  initialState: {
-    data: [],
-    loading: false,
-    error: '',
-  },
-  extraReducers: (builder) => {
-    builder.addCase(rocketsAction.pending, (state) => {
-      state.loading = true;
-      state.error = '';
+export const fetchRockets = (dispatch) => {
+  axios.get(URL)
+    .then((response) => {
+      dispatch(setRockets(response.data));
     });
-    builder.addCase(rocketsAction.fulfilled, (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(rocketsAction.rejected, (state) => {
-      state.loading = false;
-      state.error = 'Error fetching user data';
-    });
-  },
-});
+};
 
-export default rocketsSlice.reducer;
+export default rocketsReducer;
