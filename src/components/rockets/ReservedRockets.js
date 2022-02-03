@@ -5,7 +5,7 @@ const RocketsProfile = () => {
   const rocketsStore = useSelector((store) => store.rocketsReducer.rockets);
   const reservedRockets = rocketsStore.filter((rocket) => rocket.reserved === true);
   return (
-    <ul className="list-group">
+    <ul className="profile-container">
       <h4>My Rockets</h4>
       {reservedRockets.map((rockets) => (
         <li className="list-group-item" key={rockets.id}>
