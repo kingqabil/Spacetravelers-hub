@@ -1,36 +1,62 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Rockets from './Rocket';
-import { fetchRockets } from '../../redux/rockets/rockets';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import Badge from 'react-bootstrap/Badge';
+import {
+  getRocketsFromAPI,
+  reserveRocket,
+  cancelRocketReservation,
+} from '../../redux/rockets/rockets';
 
-const DisplayRockets = () => {
+const Rockets = () => {
   const dispatch = useDispatch();
-
-  const rocketsStore = useSelector((store) => store.rocketsReducer.rockets);
-
-  useEffect(() => {
-    if (!rocketsStore.length) {
-      fetchRockets(dispatch);
+  const rocketsData = useSelector((state) => state.rockets);
+  const getRockets = () => {
+    if (rocketsData.length === 0) {
+      dispatch(getRocketsFromAPI());
     }
+  };
+  useEffect(() => {
+    getRockets();
   }, []);
 
   return (
-    <div className="Rockets">
-
-      {
-        rocketsStore.map((rockets) => (
-          <Rockets
-            key={rockets.id}
-            id={rockets.id}
-            flickr_images={rockets.flickr_images}
-            rocket_name={rockets.rocket_name}
-            description={rockets.description}
-            reserved={rockets.reserved}
-          />
-        ))
-      }
+    <div className="rockets-list">
+      {rocketsData.map((rocket) => (
+        <div key={rocket.rocket_id} className="dragon">
+          <div className="dragon-img">
+            <img src={rocket.rocket_img} alt={rocket.rocket_name} />
+          </div>
+          <div className="dragon-description">
+            <h2>{rocket.rocket_name}</h2>
+            <p>
+              {rocket.reserved && (
+                <Badge bg="info" className="reserved-badge">
+                  Reserved
+                </Badge>
+              )}
+              {rocket.rocket_description}
+            </p>
+            {rocket.reserved ? (
+              <Button
+                variant="outline-secondary"
+                onClick={() => dispatch(cancelRocketReservation(rocket.rocket_id))}
+              >
+                Cancel Reservation
+              </Button>
+            ) : (
+              <Button
+                variant="primary"
+                onClick={() => dispatch(reserveRocket(rocket.rocket_id))}
+              >
+                Reserve Rocket
+              </Button>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default DisplayRockets;
+export default Rockets;
