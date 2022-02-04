@@ -1,61 +1,72 @@
-import axios from 'axios';
+const ADD_ROCKET = 'spacetravelers-hub/redux/rockets/ADD_ROCKET';
+const RESERVE_ROCKET = 'spacetravelers-hub/redux/rockets/RESERVE_ROCKET';
+const CANCEL_RESERVATION = 'spacetravelers-hub/redux/rockets/CANCEL_RESERVATION';
 
-const SET_ROCKETS = 'space-travelers/rockets/SET_ROCKETS';
-const SET_RESERVED = 'space-travelers/rockets/SET_RESERVED';
-const SET_CANCELLATION = 'space-travelers/rockets/SET_CANCELLATION';
-const URL = 'https://api.spacexdata.com/v3/rockets';
-const initialState = {
-  rockets: [],
+const rocketURL = 'https://api.spacexdata.com/v3/rockets';
+
+const initialState = [];
+
+const addRocket = (rockets) => ({
+  type: ADD_ROCKET,
+  rockets,
+});
+
+export const reserveRocket = (rocketId) => ({
+  type: RESERVE_ROCKET,
+  rocketId,
+});
+
+export const cancelRocketReservation = (rocketId) => ({
+  type: CANCEL_RESERVATION,
+  rocketId,
+});
+
+const rocketBooking = (state, id) => {
+  const newState = state.map((rocket) => {
+    if (rocket.rocket_id !== id) {
+      return rocket;
+    }
+    return { ...rocket, reserved: true };
+  });
+  return newState;
 };
 
-export const setReserved = (id) => ({
-  type: SET_RESERVED,
-  payload: id,
+const cancelReservation = (state, id) => {
+  const newState = state.map((rocket) => {
+    if (rocket.rocket_id !== id) {
+      return rocket;
+    }
+    return { ...rocket, reserved: false };
+  });
+  return newState;
+};
+
+export const getRocketsFromAPI = () => (async (dispatch) => {
+  const response = await fetch(rocketURL);
+  const data = await response.json();
+  const rocketsArr = [];
+  data.forEach((d) => {
+    const rocket = {
+      rocket_id: d.id,
+      rocket_name: d.rocket_name,
+      rocket_description: d.description,
+      rocket_img: d.flickr_images[0],
+    };
+    rocketsArr.push(rocket);
+  });
+  dispatch(addRocket(rocketsArr));
 });
 
-export const setCancellation = (id) => ({
-  type: SET_CANCELLATION,
-  payload: id,
-});
-
-const rocketsReducer = (state = initialState, action) => {
+const rocketReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ROCKETS:
-      return { ...state, rockets: action.payload };
-    case SET_RESERVED:
-      return {
-        ...state,
-        rockets: state.rockets.map(
-          (rocket) => (
-            rocket.id === action.payload ? { ...rocket, reserved: true } : rocket
-          ),
-        ),
-      };
-    case SET_CANCELLATION:
-      return {
-        ...state,
-        rockets: state.rockets.map(
-          (rocket) => (
-            rocket.id === action.payload ? { ...rocket, reserved: false } : rocket
-          ),
-        ),
-      };
-
+    case ADD_ROCKET:
+      return [...state, ...action.rockets];
+    case RESERVE_ROCKET:
+      return rocketBooking(state, action.rocketId);
+    case CANCEL_RESERVATION:
+      return cancelReservation(state, action.rocketId);
     default:
       return state;
   }
 };
-
-const setRockets = (payload) => ({
-  type: SET_ROCKETS,
-  payload,
-});
-
-export const fetchRockets = (dispatch) => {
-  axios.get(URL)
-    .then((response) => {
-      dispatch(setRockets(response.data));
-    });
-};
-
-export default rocketsReducer;
+export default rocketReducer;
