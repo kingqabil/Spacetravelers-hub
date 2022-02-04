@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dragon component tests renders correctly 1`] = `
+exports[`Dragons Component test Renders Rocket Page 1`] = `
 <div
   className="dragons-list"
 />

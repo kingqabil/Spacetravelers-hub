@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Missions component tests renders correctly 1`] = `
+exports[`Missions Component snapshot test Renders Mission Page 1`] = `
 <div
   className="table-wrapper"
 >
