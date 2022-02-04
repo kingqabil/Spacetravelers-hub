@@ -6,7 +6,7 @@ const rocketURL = 'https://api.spacexdata.com/v3/rockets';
 
 const initialState = [];
 
-const addRocket = (rockets) => ({
+export const addRocket = (rockets) => ({
   type: ADD_ROCKET,
   rockets,
 });
