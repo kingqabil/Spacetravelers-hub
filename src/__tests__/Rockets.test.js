@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import store from '../redux/configureStore';
 import Rockets from '../components/rockets/Rockets';
+import { addRocket, cancelRocketReservation, reserveRocket } from '../redux/rockets/rockets';
 
 describe('Rockets Component test', () => {
   it('Renders Rocket Page', () => {
@@ -13,5 +14,14 @@ describe('Rockets Component test', () => {
       </Provider>,
     ).toJSON();
     expect(app).toMatchSnapshot();
+  });
+  it('Returns an addRocket() action object ', () => {
+    expect(addRocket([])).toStrictEqual({ rockets: [], type: 'spacetravelers-hub/redux/rockets/ADD_ROCKET' });
+  });
+  it('Returns a reserveRocket() action object', () => {
+    expect(reserveRocket('1234')).toStrictEqual({ type: 'spacetravelers-hub/redux/rockets/RESERVE_ROCKET', rocketId: '1234' });
+  });
+  it('Returns a cancelRocketReservation() action object', () => {
+    expect(cancelRocketReservation('1234')).toStrictEqual({ type: 'spacetravelers-hub/redux/rockets/CANCEL_RESERVATION', rocketId: '1234' });
   });
 });
