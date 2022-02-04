@@ -6,7 +6,7 @@ const dragonURL = 'https://api.spacexdata.com/v3/dragons';
 
 const initialState = [];
 
-const addDragon = (dragons) => ({
+export const addDragon = (dragons) => ({
   type: ADD_DRAGON,
   dragons,
 });
