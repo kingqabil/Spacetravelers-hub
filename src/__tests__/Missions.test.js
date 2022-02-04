@@ -1,15 +1,17 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import Missions from '../components/missions/Missions';
 import store from '../redux/configureStore';
+import Missions from '../components/missions/Missions';
 
-const ReactTestRenderer = require('react-test-renderer');
+describe('Missions Component test', () => {
+  it('Renders Mission Page', () => {
+    const app = renderer.create(
+      <Provider store={store}>
+        <Missions />
 
-it('renders correctly', () => {
-  const tree = ReactTestRenderer
-    .create(
-      <Provider store={store}><Missions /></Provider>,
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+      </Provider>,
+    ).toJSON();
+    expect(app).toMatchSnapshot();
+  });
 });

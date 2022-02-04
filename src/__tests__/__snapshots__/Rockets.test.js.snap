@@ -1,6 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Rockets Component test Renders Rocket Page 1`] = `
+<div
+  className="rockets-list"
+/>
+`;
+
 exports[`renders correctly 1`] = `
+<div
+  className="rockets-list"
+/>
+`;
+
+exports[`rocket component functionality matches Rockets component snapshot 1`] = `
 <div
   className="rockets-list"
 />

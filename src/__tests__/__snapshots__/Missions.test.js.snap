@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Missions Component test Renders Mission Page 1`] = `
+<div
+  className="table-wrapper"
+>
+  <table
+    className="table table-striped table-bordered"
+  >
+    <thead>
+      <tr>
+        <th
+          className="mission"
+        >
+          Mission
+        </th>
+        <th
+          className="description"
+        >
+          Description
+        </th>
+        <th
+          className="status"
+        >
+          Status
+        </th>
+        <th
+          className="reserve"
+        />
+      </tr>
+    </thead>
+    <tbody />
+  </table>
+</div>
+`;
+
+exports[`Rockets Component test Renders Rocket Page 1`] = `
+<div
+  className="rockets-list"
+/>
+`;
+
 exports[`renders correctly 1`] = `
 <div
   className="table-wrapper"
