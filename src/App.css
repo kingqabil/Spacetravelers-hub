@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: none;
+  padding: 0;
+}
+
+.header {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 25px;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(222, 226, 230);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 10px;
+}
+
+nav li {
+  list-style: none;
+  padding: 0 25px;
+}
+
+.link {
+  text-decoration: none;
+  color: #4e98ec;
+}
+
+.active {
+  text-decoration: underline;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+}
+
+.profile {
+  border-left: 2px solid #4e98ec;
+  padding-left: 10px;
+}
+
+.dragon {
+  display: flex;
+}
+
+.dragon-img img {
+  height: 270px;
+  width: 290px;
+  padding: 20px 0 0 40px;
+}
+
+.dragon-description {
+  padding: 20px;
+}
+
+.dragon-btn {
+  background-color: #007bff;
+  color: #fff;
+  width: 100px;
+}
+
+.table-wrapper {
+  padding: 20px 35px;
+}
+
+.mission {
+  width: 10%;
+}
+
+.description {
+  width: 70%;
+}
+
+.status {
+  width: 9%;
+}
+
+.reserve {
+  width: 11%;
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table > :not(:first-child) {
+  border-top: 2px solid rgb(222, 225, 230);
+}
+
+.reserved-badge {
+  padding: 3px 3px;
+  margin-right: 5px;
+  color: #fff;
+}
+
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-container {
+  margin: 25px;
+  width: 30vw;
+}
+
+.profile-container div {
+  border: 1px solid #eee;
+  border-radius: 2px;
+}
+
+.profile-container p {
+  margin: 25px;
+}
