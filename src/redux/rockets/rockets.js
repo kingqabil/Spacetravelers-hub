@@ -48,7 +48,7 @@ export const getRocketsFromAPI = () => (async (dispatch) => {
   data.forEach((d) => {
     const rocket = {
       rocket_id: d.id,
-      rocket_name: d.name,
+      rocket_name: d.rocket_name,
       rocket_description: d.description,
       rocket_img: d.flickr_images[0],
     };
