@@ -1,11 +1,15 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { Provider } from 'react-redux';
 import Dragons from '../components/dragons/Dragons';
+import store from '../redux/configureStore';
+
+const ReactTestRenderer = require('react-test-renderer');
 
 it('renders correctly', () => {
-  const tree = renderer
+  const tree = ReactTestRenderer
     .create(
-        <Dragons />)
+      <Provider store={store}><Dragons /></Provider>,
+    )
     .toJSON();
   expect(tree).toMatchSnapshot();
 });
