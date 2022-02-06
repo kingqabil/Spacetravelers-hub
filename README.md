@@ -17,9 +17,9 @@ Users can interact with the app by joining and canceling missions, reserve or ca
 - React
 - Redux
 
-<!-- ## Live Demo -->
+## Live Demo
 
-<!-- - [Demo](https://afizmath.herokuapp.com/) -->
+[Demo](https://spacetravelers-hub.herokuapp.com/)
 
 ## Getting Started
 
